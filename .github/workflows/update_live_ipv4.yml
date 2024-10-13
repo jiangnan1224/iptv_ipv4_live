@@ -36,10 +36,13 @@ jobs:
       run: python script.py
 
     # 提交并推送文件
+    - name: Configure Git
+      run: |
+        git config user.name "GitHub Actions Bot"
+        git config user.email "actions@github.com"
+
     - name: Commit and push changes
       run: |
         git add live_ipv4.txt
-        git commit -m "Update live_ipv4.txt"
+        git commit -m "Add generated output.yaml"
         git push
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
