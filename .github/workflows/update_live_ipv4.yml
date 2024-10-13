@@ -1,48 +1,32 @@
-name: Update live_ipv4.txt
+name: Filter IPV4 Addresses
 
 on:
   schedule:
-    # 定时执行：每天凌晨2点执行（可根据需要调整）
-    - cron: '0 2 * * *'
-  workflow_dispatch: # 允许手动触发
+    - cron: '0 0 * * *'  # 每天午夜运行
+  workflow_dispatch:  # 允许手动触发
 
 jobs:
-  update-live-ipv4:
+  filter-and-push:
     runs-on: ubuntu-latest
-
     steps:
-    # 检出当前仓库代码
-    - name: Checkout repository
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v2
 
-    # 设置 Git 用户信息
-    - name: Set up Git user
-      run: |
-        git config --global user.name 'your-github-username'
-        git config --global user.email 'your-email@example.com'
-
-    # 安装 Python 环境
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v2
       with:
         python-version: '3.x'
 
-    # 安装依赖
     - name: Install dependencies
-      run: pip install requests
-
-    # 运行 Python 脚本
-    - name: Run Python script
-      run: python script.py
-
-    # 提交并推送文件
-    - name: Configure Git
       run: |
-        git config user.name "GitHub Actions Bot"
-        git config user.email "actions@github.com"
+        python -m pip install --upgrade pip
+        pip install requests
 
-    - name: Commit and push changes
+    - name: Run filtering script
+      run: python filter_ipv4.py
+
+    - name: Commit and push if changed
       run: |
+        git config --global user.email "action@github.com"
+        git config --global user.name "GitHub Action"
         git add live_ipv4.txt
-        git commit -m "Add generated output.yaml"
-        git push
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Update live_ipv4.txt" && git push)
