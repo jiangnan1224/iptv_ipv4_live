@@ -22,7 +22,7 @@ jobs:
         pip install requests
 
     - name: Run filtering script
-      run: python filter_ipv4.py
+      run: python script.py
 
     - name: Commit and push if changed
       run: |
