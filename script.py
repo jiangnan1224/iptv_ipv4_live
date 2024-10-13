@@ -8,7 +8,7 @@ def fetch_and_filter():
     content = response.text
     
     # 过滤掉包含 "ipv6" 的行
-    filtered_lines = [line for line in content.splitlines() if 'ipv6' not in line.lower(）]
+    filtered_lines = [line for line in content.splitlines() if 'ipv6' not in line.lower()]
     
     # 保存到新文件
     with open('live_ipv4.txt', 'w') as file:
