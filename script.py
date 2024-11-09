@@ -1,7 +1,7 @@
 import requests
 
 def fetch_and_filter():
-    url = 'https://raw.githubusercontent.com/yuanzl77/IPTV/refs/heads/main/live.txt'
+    url = 'https://raw.githubusercontent.com/leiyou-li/IPTV4/refs/heads/main/live.txt'
     
     # 获取文件内容
     response = requests.get(url)
