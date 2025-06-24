@@ -158,6 +158,6 @@ def updateChannelUrlsM3U(channels, template_channels):
             f_txt.write("\n")
 
 if __name__ == "__main__":
-    template_file = "iptv.txt"
+    template_file = "tv.txt"
     channels, template_channels = filter_source_urls(template_file)
     updateChannelUrlsM3U(channels, template_channels)
