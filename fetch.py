@@ -28,7 +28,7 @@ def fetch_channels(url):
     channels = OrderedDict()
 
     try:
-        response = requests.get(url)
+        response = requests.get(url, timeout=30)
         response.raise_for_status()
         response.encoding = 'utf-8'
         lines = response.text.split("\n")
